@@ -18,6 +18,7 @@ function MenuService($http, ApiPath) {
 
   service.getMenuItems = function (category) {
     var config = {};
+	console.log("Entering meunu.service.getMenuItems(), category= ", category);
     if (category) {
       config.params = {'category': category};
     }
@@ -26,7 +27,18 @@ function MenuService($http, ApiPath) {
       return response.data;
     });
   };
-
+  service.getMenuItem = function (short_name) {
+	console.log("Entering meunu.service.getMenuItem(), short_name= ", short_name);
+    return $http.get(ApiPath + '/menu_items/' + short_name + '.json')
+    .then(
+      function (response) {
+        return response;
+      },
+      function(error) {
+        return error;
+      }
+    );
+  };
 }
 
 
